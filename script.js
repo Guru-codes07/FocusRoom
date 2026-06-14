@@ -1,4 +1,4 @@
-// ════════════ DATA ════════════
+
 const ROOMS = [
   {id:1,name:"Deep Focus Zone",desc:"Binaural Beats · No Chat",mode:"deep",members:18,max:20,colors:["#6C5CE7","#a29bfe","#fd79a8","#00cec9","#e17055"],joined:true},
   {id:2,name:"CS Exam Prep",desc:"Silent Mode · Group Study",mode:"exam",members:6,max:10,colors:["#0984e3","#74b9ff","#55efc4"]},
