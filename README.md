@@ -151,7 +151,7 @@ Planned enhancements include:
 Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/FocusRoom.git
+git clone https://github.com/Guru-codes07/FocusRoom.git
 ```
 
 Navigate to the project folder:
