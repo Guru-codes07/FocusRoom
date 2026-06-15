@@ -1,199 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FocusRoom — Study Together, Stay Focused</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FocusRoom — A distraction-free productivity app with Pomodoro timer, task management, ambient sounds, and progress tracking.">
+  <title>FocusRoom — Stay Focused. Get Things Done.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- ═══════════ LOGIN ═══════════ -->
-<div id="screen-login">
-  <div class="login-box">
-    <div class="login-logo">FR</div>
-    <h1 class="login-title">FocusRoom</h1>
-    <p class="login-sub">Study together. Stay focused.</p>
-    <button class="oauth-btn" onclick="toast('🔵 Google OAuth — connect your backend!')">🔵 Continue with Google</button>
-    <button class="oauth-btn" onclick="toast('⚫ GitHub OAuth — connect your backend!')">⚫ Continue with GitHub</button>
-    <div class="divider">or</div>
-    <div class="inp-grp"><label>Email address</label><input type="email" id="l-email" placeholder="you@arunai.edu"></div>
-    <div class="inp-grp"><label>Password</label><input type="password" id="l-pass" placeholder="••••••••"></div>
-    <button class="btn-primary" onclick="login()">Sign In to Focus</button>
-    <p class="login-toggle">Don't have an account? <a onclick="login()">Sign Up Free</a></p>
-  </div>
-</div>
-
-<!-- ═══════════ APP ═══════════ -->
-<div id="screen-app" class="hidden">
-
-  <aside class="sidebar">
-    <div class="sb-logo">
-      <div class="sb-logo-icon">F</div>
-      <span class="sb-logo-text">FocusRoom</span>
-    </div>
-    <nav class="sb-nav">
-      <button class="nav-item active" id="n-rooms" onclick="go('rooms')"><span>🏠</span><span>Home</span></button>
-      <button class="nav-item" id="n-study" onclick="go('rooms')"><span>📚</span><span>Study Rooms</span></button>
-      <button class="nav-item" id="n-pomo" onclick="go('room')"><span>⏱️</span><span>Pomodoro</span></button>
-      <button class="nav-item" id="n-amb" onclick="go('ambient')"><span>🎵</span><span>Ambient</span></button>
-      <button class="nav-item" id="n-stats" onclick="go('stats')"><span>📊</span><span>Stats</span></button>
-    </nav>
-    <div class="sb-user">
-      <div class="u-avatar" id="sb-av">G</div>
-      <div><div class="u-name" id="sb-name">Guruprasad</div><div class="u-reg">510424104067</div></div>
-      <div class="online-dot"></div>
-    </div>
-  </aside>
-
-  <main class="main">
-
-    <!-- ROOMS PAGE -->
-    <div id="page-rooms">
-      <div class="page-hdr">
-        <h1 class="page-title">Study Rooms</h1>
-        <button class="btn-add" onclick="openModal()">+ Create Room</button>
+  <!-- ========== HEADER ========== -->
+  <header id="main-header">
+    <div class="header-inner">
+      <div class="logo" id="logo">
+        <span class="logo-icon">◉</span>
+        <span class="logo-text">FocusRoom</span>
       </div>
-      <div class="chips">
-        <div class="chip"><div class="chip-val">47</div><div class="chip-lbl">Online Now</div></div>
-        <div class="chip"><div class="chip-val">12</div><div class="chip-lbl">Active Rooms</div></div>
-        <div class="chip"><div class="chip-val">2.3h</div><div class="chip-lbl">Avg Session</div></div>
+      <nav id="main-nav">
+        <a href="#hero" class="nav-link active" data-section="hero">Home</a>
+        <a href="#timer-section" class="nav-link" data-section="timer-section">Timer</a>
+        <a href="#tasks-section" class="nav-link" data-section="tasks-section">Tasks</a>
+        <a href="#stats-section" class="nav-link" data-section="stats-section">Stats</a>
+        <a href="#sounds-section" class="nav-link" data-section="sounds-section">Sounds</a>
+      </nav>
+      <div class="header-right">
+        <span id="current-date" class="current-date"></span>
+        <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
       </div>
-      <div class="search-row">
-        <input class="search-inp" placeholder="🔍 Search rooms..." oninput="filterRooms(this.value)">
-        <div class="pills">
-          <button class="pill active" onclick="setFilter('all',this)">All</button>
-          <button class="pill" onclick="setFilter('deep',this)">Deep Work</button>
-          <button class="pill" onclick="setFilter('exam',this)">Exam Mode</button>
-          <button class="pill" onclick="setFilter('chat',this)">Chill</button>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section id="hero" class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">Focus<span class="accent">Room</span></h1>
+      <p class="hero-subtitle">Stay Focused. Track Your Progress. Get Things Done.</p>
+      <a href="#timer-section" class="cta-btn" id="cta-btn">
+        <span>Start Focusing</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ========== DASHBOARD CARDS ========== -->
+  <section id="dashboard-section" class="section">
+    <h2 class="section-title">Productivity Dashboard</h2>
+    <div class="dashboard-grid" id="dashboard-grid">
+      <div class="dash-card" id="dash-tasks-done">
+        <div class="dash-icon">✓</div>
+        <div class="dash-value" id="dash-tasks-done-val">0</div>
+        <div class="dash-label">Tasks Completed</div>
+      </div>
+      <div class="dash-card" id="dash-tasks-pending">
+        <div class="dash-icon">☐</div>
+        <div class="dash-value" id="dash-tasks-pending-val">0</div>
+        <div class="dash-label">Tasks Pending</div>
+      </div>
+      <div class="dash-card" id="dash-sessions">
+        <div class="dash-icon">⏱</div>
+        <div class="dash-value" id="dash-sessions-val">0</div>
+        <div class="dash-label">Focus Sessions</div>
+      </div>
+      <div class="dash-card" id="dash-focus-time">
+        <div class="dash-icon">⏳</div>
+        <div class="dash-value" id="dash-focus-time-val">0m</div>
+        <div class="dash-label">Total Focus Time</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== MOTIVATION ========== -->
+  <section id="motivation-section" class="section">
+    <div class="quote-card" id="quote-card">
+      <div class="quote-icon">"</div>
+      <p class="quote-text" id="quote-text"></p>
+      <p class="quote-author" id="quote-author"></p>
+    </div>
+  </section>
+
+  <!-- ========== POMODORO TIMER ========== -->
+  <section id="timer-section" class="section">
+    <h2 class="section-title">Pomodoro Timer</h2>
+    <div class="timer-container">
+      <div class="timer-mode-switch">
+        <button class="mode-btn active" id="focus-mode-btn" data-mode="focus">Focus</button>
+        <button class="mode-btn" id="break-mode-btn" data-mode="break">Break</button>
+      </div>
+      <div class="timer-ring-wrap">
+        <svg class="timer-ring" viewBox="0 0 260 260">
+          <circle class="timer-ring-bg" cx="130" cy="130" r="120" />
+          <circle class="timer-ring-progress" id="timer-ring-progress" cx="130" cy="130" r="120" />
+        </svg>
+        <div class="timer-display">
+          <span class="timer-label" id="timer-label">Focus Session</span>
+          <span class="timer-time" id="timer-time">25:00</span>
         </div>
       </div>
-      <div class="rooms-grid" id="rooms-grid"></div>
+      <div class="timer-controls">
+        <button class="timer-btn" id="timer-start-btn" aria-label="Start timer">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+        </button>
+        <button class="timer-btn" id="timer-pause-btn" aria-label="Pause timer" style="display:none">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        </button>
+        <button class="timer-btn secondary" id="timer-reset-btn" aria-label="Reset timer">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+        </button>
+      </div>
+      <p class="timer-sessions" id="timer-sessions-count">Sessions completed today: 0</p>
     </div>
+  </section>
 
-    <!-- ACTIVE ROOM PAGE -->
-    <div id="page-room" class="hidden">
-      <div class="page-hdr">
-        <div style="display:flex;align-items:center;gap:1rem;">
-          <button class="back-btn" onclick="leaveRoom()">← Leave</button>
-          <div>
-            <h1 class="page-title" id="ar-name">Deep Focus Zone</h1>
-            <span style="font-size:0.8rem;color:var(--muted);" id="ar-members">18 Members</span>
-          </div>
-        </div>
-        <div style="display:flex;align-items:center;gap:0.5rem;">
-          <div class="online-dot"></div>
-          <span style="font-size:0.82rem;color:var(--muted);">Online</span>
-        </div>
+  <!-- ========== TASKS ========== -->
+  <section id="tasks-section" class="section">
+    <h2 class="section-title">Task Manager</h2>
+    <div class="tasks-container">
+      <div class="task-input-row">
+        <input type="text" id="task-input" class="task-input" placeholder="What do you need to focus on?" maxlength="120" />
+        <button class="task-add-btn" id="task-add-btn">Add Task</button>
       </div>
-      <div class="room-layout">
-        <div>
-          <div class="room-panel">
-            <div class="sec-lbl">🎵 Ambient Sound</div>
-            <div class="amb-mini" id="amb-mini"></div>
-          </div>
-          <div class="room-panel" style="text-align:center;">
-            <div class="pomo-center">
-              <div class="ring-wrap">
-                <svg width="180" height="180" viewBox="0 0 180 180">
-                  <circle class="ring-bg" cx="90" cy="90" r="82"/>
-                  <circle class="ring-prog" id="t-ring" cx="90" cy="90" r="82" stroke-dasharray="515" stroke-dashoffset="0"/>
-                </svg>
-                <div class="ring-text">
-                  <div class="ring-time" id="t-disp">25:00</div>
-                  <div class="ring-phase" id="t-phase">FOCUS</div>
-                </div>
-              </div>
-              <div class="t-ctrls">
-                <button class="t-btn" onclick="resetTimer()" title="Reset">↺</button>
-                <button class="t-btn t-play" id="t-play" onclick="toggleTimer()">▶</button>
-                <button class="t-btn" onclick="skipPhase()" title="Skip">⏭</button>
-              </div>
-              <div class="t-info" id="t-info">Session 1 of 4 · Short break in 25:00</div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div class="room-panel">
-            <div class="sec-lbl">👥 Members (<span id="m-count">18</span>)</div>
-            <div class="member-list" id="member-list"></div>
-          </div>
-        </div>
-      </div>
+      <ul class="task-list" id="task-list"></ul>
+      <p class="task-empty" id="task-empty">No tasks yet. Add one above!</p>
     </div>
+  </section>
 
-    <!-- AMBIENT PAGE -->
-    <div id="page-ambient" class="hidden">
-      <div class="page-hdr"><h1 class="page-title">Ambient Sound Mixer</h1></div>
-      <p style="color:var(--muted);font-size:0.88rem;margin-bottom:1.5rem;">Mix your perfect focus environment</p>
-      <div class="amb-grid" id="amb-grid"></div>
+  <!-- ========== STATS ========== -->
+  <section id="stats-section" class="section">
+    <h2 class="section-title">Focus Statistics</h2>
+    <div class="stats-grid" id="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value" id="stat-total-sessions">0</div>
+        <div class="stat-label">Total Sessions</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-total-minutes">0</div>
+        <div class="stat-label">Total Focus Minutes</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-completion">0%</div>
+        <div class="stat-label">Completion Rate</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-streak">0</div>
+        <div class="stat-label">Current Streak (days)</div>
+      </div>
     </div>
+    <div class="daily-summary-card" id="daily-summary-card">
+      <h3>Today's Summary</h3>
+      <div class="daily-row"><span>Sessions</span><span id="daily-sessions">0</span></div>
+      <div class="daily-row"><span>Minutes Focused</span><span id="daily-minutes">0</span></div>
+      <div class="daily-row"><span>Tasks Completed</span><span id="daily-tasks">0</span></div>
+    </div>
+  </section>
 
-    <!-- STATS PAGE -->
-    <div id="page-stats" class="hidden">
-      <div class="page-hdr"><h1 class="page-title">Your Focus Stats</h1></div>
-      <div class="stats-ov">
-        <div class="stat-card"><span class="sc-icon">🔥</span><div class="sc-val">12</div><div class="sc-lbl">Day Streak</div></div>
-        <div class="stat-card"><span class="sc-icon">⏱️</span><div class="sc-val">4.2h</div><div class="sc-lbl">Today's Focus</div></div>
-        <div class="stat-card"><span class="sc-icon">📅</span><div class="sc-val">28.6h</div><div class="sc-lbl">This Week</div></div>
-        <div class="stat-card"><span class="sc-icon">🏆</span><div class="sc-val">#3</div><div class="sc-lbl">Leaderboard</div></div>
+  <!-- ========== AMBIENT SOUNDS ========== -->
+  <section id="sounds-section" class="section">
+    <h2 class="section-title">Ambient Sounds</h2>
+    <div class="sounds-grid" id="sounds-grid">
+      <div class="sound-card" data-sound="rain">
+        <div class="sound-icon">🌧️</div>
+        <div class="sound-name">Rain</div>
+        <button class="sound-toggle-btn" id="sound-toggle-rain" aria-label="Toggle rain sound">
+          <svg class="play-icon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          <svg class="pause-icon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="display:none"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        </button>
+        <input type="range" class="sound-volume" id="sound-volume-rain" min="0" max="100" value="50" aria-label="Rain volume">
       </div>
-      <div class="stats-grid">
-        <div class="panel">
-          <div class="p-title">📈 Focus Hours — Last 7 Days</div>
-          <div class="bar-chart" id="bar-chart"></div>
-        </div>
-        <div class="panel">
-          <div class="p-title">🏠 Top Rooms</div>
-          <div id="top-rooms"></div>
-        </div>
-        <div class="panel" style="grid-column:1/-1;">
-          <div class="p-title">🟣 Activity Heatmap</div>
-          <div class="heatmap" id="heatmap"></div>
-        </div>
+      <div class="sound-card" data-sound="ocean">
+        <div class="sound-icon">🌊</div>
+        <div class="sound-name">Ocean</div>
+        <button class="sound-toggle-btn" id="sound-toggle-ocean" aria-label="Toggle ocean sound">
+          <svg class="play-icon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          <svg class="pause-icon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="display:none"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        </button>
+        <input type="range" class="sound-volume" id="sound-volume-ocean" min="0" max="100" value="50" aria-label="Ocean volume">
+      </div>
+      <div class="sound-card" data-sound="forest">
+        <div class="sound-icon">🌲</div>
+        <div class="sound-name">Forest</div>
+        <button class="sound-toggle-btn" id="sound-toggle-forest" aria-label="Toggle forest sound">
+          <svg class="play-icon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          <svg class="pause-icon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="display:none"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        </button>
+        <input type="range" class="sound-volume" id="sound-volume-forest" min="0" max="100" value="50" aria-label="Forest volume">
+      </div>
+      <div class="sound-card" data-sound="cafe">
+        <div class="sound-icon">☕</div>
+        <div class="sound-name">Café</div>
+        <button class="sound-toggle-btn" id="sound-toggle-cafe" aria-label="Toggle cafe sound">
+          <svg class="play-icon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          <svg class="pause-icon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="display:none"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        </button>
+        <input type="range" class="sound-volume" id="sound-volume-cafe" min="0" max="100" value="50" aria-label="Cafe volume">
       </div>
     </div>
+  </section>
 
-  </main>
-</div>
+  <!-- ========== FOOTER ========== -->
+  <footer id="main-footer">
+    <p>© 2026 FocusRoom · Stay Focused. Get Things Done.</p>
+  </footer>
 
-<!-- MODAL -->
-<div class="modal-ov hidden" id="modal-ov" onclick="closeOuter(event)">
-  <div class="modal-box">
-    <h2 class="m-title">Create a New Room</h2>
-    <div class="fg"><label>Room Name</label><input id="nr-name" placeholder="e.g. Deep Focus — Algorithms"></div>
-    <div class="fg"><label>Description</label><input id="nr-desc" placeholder="What's the vibe?"></div>
-    <div class="fg"><label>Room Mode</label>
-      <div class="opt-grp">
-        <button class="opt sel" onclick="selOpt(this,'mode')">🔇 Silent</button>
-        <button class="opt" onclick="selOpt(this,'mode')">💬 Chat OK</button>
-        <button class="opt" onclick="selOpt(this,'mode')">📝 Exam Mode</button>
-      </div>
-    </div>
-    <div class="fg"><label>Pomodoro Timer</label>
-      <div class="opt-grp">
-        <button class="opt" onclick="selOpt(this,'timer')">15 min</button>
-        <button class="opt sel" onclick="selOpt(this,'timer')">25 min</button>
-        <button class="opt" onclick="selOpt(this,'timer')">45 min</button>
-        <button class="opt" onclick="selOpt(this,'timer')">60 min</button>
-      </div>
-    </div>
-    <div class="fg"><label>Ambient Default</label>
-      <div class="opt-grp">
-        <button class="opt sel" onclick="selOpt(this,'amb')">🌧️ Rain</button>
-        <button class="opt" onclick="selOpt(this,'amb')">🌊 Waves</button>
-        <button class="opt" onclick="selOpt(this,'amb')">🔥 Fire</button>
-        <button class="opt" onclick="selOpt(this,'amb')">➖ None</button>
-      </div>
-    </div>
-    <div class="m-foot">
-      <button class="btn-ghost" onclick="closeModal()">Cancel</button>
-      <button class="btn-primary" style="flex:1;" onclick="createRoom()">🚀 Create Room</button>
-    </div>
-  </div>
-</div>
-
-<script src="script.js"></script>
+  <!-- Scripts -->
+  <script src="js/sounds.js"></script>
+  <script src="js/timer.js"></script>
+  <script src="js/tasks.js"></script>
+  <script src="js/stats.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
+
